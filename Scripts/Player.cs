@@ -15,10 +15,14 @@ public class Player : KinematicBody2D
     private Vector2 motion;
     private Vector2 up;
 
+    private AnimatedSprite sprite;
+
     public override void _Ready()
     {
         motion = new Vector2();
         up = new Vector2(0, -1);
+
+        sprite = GetNode<AnimatedSprite>("Sprite");
     }
 
     public override void _PhysicsProcess(float delta)
@@ -28,19 +32,31 @@ public class Player : KinematicBody2D
         if(Input.IsActionPressed("move_right"))
         {
             motion.x = moveSpeed;
+            sprite.SetFlipH(false);
+            sprite.Play("Run");
         }
         else if(Input.IsActionPressed("move_left"))
         {
             motion.x = -moveSpeed;
+            sprite.SetFlipH(true);
+            sprite.Play("Run");
         }
         else
         {
             motion.x = 0;
+            sprite.Play("Idle");
         }
 
-        if(IsOnFloor() && Input.IsActionJustPressed("move_up"))
+        if(IsOnFloor())
         {
-            motion.y = jumpHeight;
+            if(Input.IsActionJustPressed("move_up"))
+            {
+                motion.y = jumpHeight;
+            }
+        }
+        else
+        {
+            sprite.Play("Jump");
         }
 
         motion = MoveAndSlide(motion, up);
