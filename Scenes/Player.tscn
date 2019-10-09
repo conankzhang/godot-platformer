@@ -1,17 +1,19 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/Player/Jump1.png" type="Texture" id=2]
 [ext_resource path="res://Art/Sprites/Player/Idle0.png" type="Texture" id=3]
-[ext_resource path="res://Art/Sprites/Player/Run0.png" type="Texture" id=4]
-[ext_resource path="res://Art/Sprites/Player/Run1.png" type="Texture" id=5]
-[ext_resource path="res://Art/Sprites/Player/Run2.png" type="Texture" id=6]
-[ext_resource path="res://Art/Sprites/Player/Run3.png" type="Texture" id=7]
-[ext_resource path="res://Art/Sprites/Player/Run4.png" type="Texture" id=8]
-[ext_resource path="res://Art/Sprites/Player/Run5.png" type="Texture" id=9]
+[ext_resource path="res://Art/Sprites/Player/Jump3.png" type="Texture" id=4]
+[ext_resource path="res://Art/Sprites/Player/Run0.png" type="Texture" id=5]
+[ext_resource path="res://Art/Sprites/Player/Run1.png" type="Texture" id=6]
+[ext_resource path="res://Art/Sprites/Player/Run2.png" type="Texture" id=7]
+[ext_resource path="res://Art/Sprites/Player/Run3.png" type="Texture" id=8]
+[ext_resource path="res://Art/Sprites/Player/Run4.png" type="Texture" id=9]
+[ext_resource path="res://Art/Sprites/Player/Run5.png" type="Texture" id=10]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14, 28 )
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 14.0
+height = 28.0
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -25,7 +27,12 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "Run",
 "speed": 10.0
@@ -36,13 +43,12 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-moveSpeed = 100
-jumpHeight = -400
-gravity = 15.0
+jumpHeight = -400.0
+gravity = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
