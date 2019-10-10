@@ -1,2 +1,2 @@
-# godot-tutorial
-A small tutorial project to learn Godot.
+# godot-platformer
+A small platformer project to learn Godot.
