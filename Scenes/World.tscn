@@ -22,4 +22,3 @@ __meta__ = {
 [node name="WorldComplete" parent="." instance=ExtResource( 3 )]
 position = Vector2( 416, 68 )
 nextWorld = "Scenes/World2.tscn"
-[connection signal="body_entered" from="WorldComplete" to="WorldComplete" method="OnWorldCompleteBodyEntered"]

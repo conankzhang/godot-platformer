@@ -1,17 +1,18 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Player.cs" type="Script" id=1]
-[ext_resource path="res://Art/Sprites/Player/Jump1.png" type="Texture" id=2]
-[ext_resource path="res://Art/Sprites/Player/Idle0.png" type="Texture" id=3]
-[ext_resource path="res://Art/Sprites/Player/Jump3.png" type="Texture" id=4]
-[ext_resource path="res://Art/Sprites/Player/Run0.png" type="Texture" id=5]
-[ext_resource path="res://Art/Sprites/Player/Run1.png" type="Texture" id=6]
-[ext_resource path="res://Art/Sprites/Player/Run2.png" type="Texture" id=7]
-[ext_resource path="res://Art/Sprites/Player/Run3.png" type="Texture" id=8]
-[ext_resource path="res://Art/Sprites/Player/Run4.png" type="Texture" id=9]
-[ext_resource path="res://Art/Sprites/Player/Run5.png" type="Texture" id=10]
+[ext_resource path="res://Art/Sprites/Player/Idle0.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sprites/Player/Jump3.png" type="Texture" id=3]
+[ext_resource path="res://Art/Sprites/Player/Run0.png" type="Texture" id=4]
+[ext_resource path="res://Art/Sprites/Player/Run1.png" type="Texture" id=5]
+[ext_resource path="res://Art/Sprites/Player/Run2.png" type="Texture" id=6]
+[ext_resource path="res://Art/Sprites/Player/Run3.png" type="Texture" id=7]
+[ext_resource path="res://Art/Sprites/Player/Run4.png" type="Texture" id=8]
+[ext_resource path="res://Art/Sprites/Player/Run5.png" type="Texture" id=9]
+[ext_resource path="res://Art/Sprites/Player/Jump1.png" type="Texture" id=10]
+[ext_resource path="res://Art/Sprites/Sky.png" type="Texture" id=11]
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 14.0
 height = 28.0
 
@@ -19,36 +20,33 @@ height = 28.0
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "Jump",
+"name": "Idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
 "name": "Fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "Run",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
 } ]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 jumpHeight = -400.0
 gravity = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 4 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -56,3 +54,18 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.1 )
+motion_mirroring = Vector2( 640, 640 )
+
+[node name="Sky" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 11 )
+centered = false
