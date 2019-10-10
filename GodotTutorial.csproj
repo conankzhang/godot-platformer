@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenes\StartMenu.cs" />
     <Compile Include="Scripts\Player.cs" />
     <Compile Include="Scripts\WorldComplete.cs" />
   </ItemGroup>
